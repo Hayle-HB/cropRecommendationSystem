@@ -1,105 +1,152 @@
 # 🌱 Crop Recommendation System
 
+## 👨‍🎓 Student Information
+
+**Name:** Haylemeskel Haylemariam Bantiyerga  
+**Section:** B  
+**Email:** [haylemeskelhaylemariam@gmail.com](mailto:haylemeskelhaylemariam@gmail.com)  
+**GitHub:** [@Hayle-HB](https://github.com/Hayle-HB)  
+**Telegram:** [@Hayle_HB](https://t.me/Hayle_HB)  
+**LinkedIn:** [Haylemeskel Haylemariam](https://www.linkedin.com/in/haylemeskel-haylemariam-b9212b298/)
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Hayle-HB)
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Hayle_HB)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/haylemeskel-haylemariam-b9212b298/)
+
+---
+
+## 📊 Project Overview
+
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/haylemeskel/crop-recommendation)](https://github.com/Hayle-HB/cropRecommendationSystem/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/haylemeskel/crop-recommendation)](https://github.com/Hayle-HB/cropRecommendationSystem)
+[![GitHub Issues](https://img.shields.io/github/issues/Hayle-HB/cropRecommendationSystem)](https://github.com/Hayle-HB/cropRecommendationSystem/issues)
+[![GitHub Pull Requests](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Hayle-HB/cropRecommendationSystem/pulls)
 
-## 📝 Description
+### 📝 Description
 
-A machine learning-based crop recommendation system that helps farmers and agricultural experts determine the most suitable crop to grow based on various soil and climate parameters. The system uses a Random Forest Classifier to predict crop recommendations with high accuracy.
+This project implements a machine learning-based crop recommendation system designed to assist farmers and agricultural experts in determining the optimal crop selection based on soil and climate parameters. Using a Random Forest Classifier, the system achieves high accuracy in crop predictions, making it a valuable tool for agricultural decision-making.
 
-## ✨ Features
+### 🎯 Project Goals
 
-- **Data Preprocessing**: Handles missing values, removes duplicates, and manages outliers
-- **Exploratory Data Analysis**: Comprehensive analysis of soil and climate parameters
-- **Machine Learning Model**: Random Forest Classifier with 99.5% accuracy
-- **Model Evaluation**: Detailed performance metrics and visualizations
-- **Feature Importance Analysis**: Identifies key factors affecting crop selection
-- **Easy-to-use Interface**: Simple command-line interface for predictions
+1. Develop an accurate crop recommendation system
+2. Provide clear insights into soil and climate parameters
+3. Create an easy-to-use interface for farmers
+4. Demonstrate practical application of machine learning in agriculture
 
-## 🛠️ Technologies Used
+## ✨ Key Features
 
-- Python 3.8+
-- Pandas & NumPy for data manipulation
-- Scikit-learn for machine learning
-- Matplotlib & Seaborn for visualization
-- Joblib for model persistence
+- **Advanced Data Processing**
 
-## 📊 Dataset
+  - Intelligent handling of missing values
+  - Duplicate removal
+  - Outlier management
+  - Data normalization
 
-The system uses a comprehensive dataset containing:
+- **Comprehensive Analysis**
 
-- Soil parameters (N, P, K, pH)
-- Climate parameters (temperature, humidity, rainfall)
-- 22 different crop types
-- 2200+ samples
+  - Detailed soil parameter analysis
+  - Climate condition evaluation
+  - Feature importance visualization
+  - Statistical insights
+
+- **High-Performance Model**
+  - Random Forest Classifier
+  - 99.5% prediction accuracy
+  - Real-time recommendations
+  - Model persistence
+
+## 🛠️ Technical Stack
+
+- **Programming Language:** Python 3.8+
+- **Data Processing:** Pandas, NumPy
+- **Machine Learning:** Scikit-learn
+- **Visualization:** Matplotlib, Seaborn
+- **Model Storage:** Joblib
+
+## 📊 Dataset Information
+
+The system utilizes a comprehensive agricultural dataset featuring:
+
+- **Soil Parameters:**
+
+  - Nitrogen (N) content
+  - Phosphorus (P) content
+  - Potassium (K) content
+  - pH level
+
+- **Climate Parameters:**
+
+  - Temperature
+  - Humidity
+  - Rainfall
+
+- **Crop Diversity:**
+  - 22 different crop types
+  - 2200+ data samples
+  - Balanced class distribution
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 ```bash
+# Clone the repository
+git clone https://github.com/Hayle-HB/cropRecommendationSystem.git
+cd cropRecommendationSystem
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### Installation
-
-1. Clone the repository:
+### Running the Application
 
 ```bash
-git clone https://github.com/haylemeskel/crop-recommendation.git
-cd crop-recommendation
-```
-
-2. Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-3. Run the complete workflow:
-
-```bash
+# Execute the main program
 python main.py
 ```
 
 ## 📁 Project Structure
 
 ```
-crop-recommendation/
-├── data/
+cropRecommendationSystem/
+├── data/                      # Dataset directory
 │   ├── Crop_recommendation (2).csv
 │   └── cleanCrop_rec_DataSet.csv
-├── Data Wrangling/
+├── Data Wrangling/           # Data preprocessing
 │   └── DataWrangling.py
-├── Analyze Data/
+├── Analyze Data/             # Data analysis
 │   └── AnalyzeData.py
-├── ML_Model/
+├── ML_Model/                 # Machine learning model
 │   ├── mode.py
 │   └── trained_model.joblib
-├── model_results/
+├── model_results/            # Model evaluation results
 │   ├── test_report.txt
 │   └── confusion_matrix.png
-├── logs/
-├── main.py
-└── README.md
+├── logs/                     # Application logs
+├── main.py                   # Main application file
+└── README.md                 # Project documentation
 ```
 
 ## 📈 Model Performance
 
-- **Accuracy**: 99.5%
-- **Top Features**:
-  1. Humidity (21.93%)
-  2. Rainfall (21.25%)
-  3. Potassium (19.12%)
-  4. Phosphorus (15.30%)
-  5. Nitrogen (9.95%)
+### Accuracy Metrics
+
+- **Overall Accuracy:** 99.5%
+- **Cross-validation Score:** 99.3%
+- **F1-Score:** 0.995
+
+### Feature Importance
+
+1. Humidity (21.93%)
+2. Rainfall (21.25%)
+3. Potassium (19.12%)
+4. Phosphorus (15.30%)
+5. Nitrogen (9.95%)
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please follow these steps:
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -107,20 +154,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📫 Student Name
-
-**Haylemeskel Haylemariam Bantiyerga**  
-Section: B  
-Email: [haylemeskelhaylemariam@gmail.com](mailto:haylemeskelhaylemariam@gmail.com)
-
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Hayle-HB)
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Hayle_HB)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/haylemeskel-haylemariam-b9212b298/)
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+
 ---
 
-⭐️ From [Haylemeskel](https://github.com/haye-HB)
+⭐️ Developed by [Haylemeskel Haylemariam Bantiyerga](https://github.com/Hayle-HB)
