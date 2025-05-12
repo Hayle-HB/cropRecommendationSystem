@@ -145,6 +145,32 @@ cropRecommendationSystem/
 4. Phosphorus (15.30%)
 5. Nitrogen (9.95%)
 
+## 🖼️ Visual Insights
+
+Below are some key visualizations generated during data analysis and model evaluation:
+
+### 1. Crop Class Distribution
+
+![Class Distribution](model_results/class_distribution.png)
+_Distribution of crop types in the dataset. Most crops are well-balanced, but a few have fewer samples._
+
+### 2. Feature Correlation Heatmap
+
+![Correlation Heatmap](model_results/correlation_heatmap.png)
+_Correlation matrix showing relationships between soil and climate features. Strong positive and negative correlations are highlighted._
+
+### 3. Feature Distributions by Crop Type
+
+![Feature Boxplots](model_results/feature_boxplots.png)
+_Boxplots showing how each feature varies across different crop types. Useful for identifying distinguishing characteristics._
+
+### 4. Numerical Feature Distributions
+
+![Numerical Distributions](model_results/numerical_distributions.png)
+_Histograms of all numerical features, stacked by crop type, to visualize the spread and overlap among crops._
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
