@@ -2,12 +2,13 @@
 
 ## 👨‍🎓 Student Information
 
-**Name:** Haylemeskel Haylemariam Bantiyerga  
-**Section:** B  
-**Email:** [haylemeskelhaylemariam@gmail.com](mailto:haylemeskelhaylemariam@gmail.com)  
-**GitHub:** [@Hayle-HB](https://github.com/Hayle-HB)  
-**Telegram:** [@Hayle_HB](https://t.me/Hayle_HB)  
-**LinkedIn:** [Haylemeskel Haylemariam](https://www.linkedin.com/in/haylemeskel-haylemariam-b9212b298/)
+| **Name**    | Haylemeskel Haylemariam Bantiyerga                                          |
+| ----------- | --------------------------------------------------------------------------- |
+| **ID No.**  | ETS0756/14                                                                  |
+| **Section** | B                                                                           |
+| **Email**   | [haylemeskelhaylemariam@gmail.com](mailto:haylemeskelhaylemariam@gmail.com) |
+
+### Connect With Me
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Hayle-HB)
 [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Hayle_HB)
@@ -157,7 +158,6 @@ Contributions are welcome! Please follow these steps:
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 
 ---
 
