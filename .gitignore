@@ -32,7 +32,7 @@ Thumbs.db
 *.pkl
 *.joblib
 *.h5
-*.csv
+
 *.xlsx
 
 # Node.js
