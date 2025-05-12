@@ -7,7 +7,7 @@ from datetime import datetime
 sys.path.append(str(Path(__file__).parent / 'Data Wrangling'))
 sys.path.append(str(Path(__file__).parent / 'Analyze Data'))
 sys.path.append(str(Path(__file__).parent / 'ML_Model'))
-
+ 
 # Import our custom modules
 from DataWrangling import load_and_clean_data
 from AnalyzeData import analyze_data
