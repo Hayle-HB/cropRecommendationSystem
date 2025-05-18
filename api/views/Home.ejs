@@ -420,6 +420,165 @@
           justify-content: center;
         }
       }
+
+      .how-it-works {
+        background: var(--background);
+        padding: 4rem 5% 3rem 5%;
+        text-align: center;
+      }
+
+      .how-it-works h2 {
+        font-size: 2.2rem;
+        color: var(--primary);
+        margin-bottom: 2rem;
+      }
+
+      .steps {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .step {
+        background: var(--background-alt);
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        padding: 2rem 1.5rem;
+        max-width: 260px;
+        flex: 1 1 220px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .step i {
+        font-size: 2.2rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .step-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .step-desc {
+        color: var(--text-light);
+        font-size: 0.98rem;
+      }
+
+      .testimonials {
+        background: var(--background-alt);
+        padding: 4rem 5% 3rem 5%;
+        text-align: center;
+      }
+
+      .testimonials h2 {
+        font-size: 2.2rem;
+        color: var(--primary);
+        margin-bottom: 2rem;
+      }
+
+      .testimonial-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      .testimonial {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        padding: 2rem 1.5rem;
+        max-width: 320px;
+        flex: 1 1 220px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .testimonial .avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1.7rem;
+        margin-bottom: 1rem;
+      }
+
+      .testimonial .name {
+        font-weight: 600;
+        color: var(--primary-dark);
+        margin-bottom: 0.3rem;
+      }
+
+      .testimonial .role {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        margin-bottom: 0.7rem;
+      }
+
+      .testimonial .quote {
+        font-style: italic;
+        color: var(--text-dark);
+        font-size: 1.05rem;
+      }
+
+      .get-started-section {
+        background: linear-gradient(
+          90deg,
+          var(--primary) 60%,
+          var(--primary-dark) 100%
+        );
+        color: #fff;
+        text-align: center;
+        padding: 3rem 5% 3rem 5%;
+      }
+
+      .get-started-section h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .get-started-section p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+      }
+
+      .get-started-btn {
+        background: #fff;
+        color: var(--primary-dark);
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .get-started-btn:hover {
+        background: var(--secondary);
+        color: #fff;
+      }
+
+      @media (max-width: 900px) {
+        .steps,
+        .testimonial-cards {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -475,6 +634,82 @@
           </p>
         </div>
       </div>
+    </section>
+
+    <section class="how-it-works">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <i class="fas fa-clipboard-list"></i>
+          <div class="step-title">1. Enter Your Data</div>
+          <div class="step-desc">
+            Input your soil nutrients, climate, and rainfall information.
+          </div>
+        </div>
+        <div class="step">
+          <i class="fas fa-microchip"></i>
+          <div class="step-title">2. AI Analysis</div>
+          <div class="step-desc">
+            Our intelligent model analyzes your data for optimal crop selection.
+          </div>
+        </div>
+        <div class="step">
+          <i class="fas fa-seedling"></i>
+          <div class="step-title">3. Get Recommendation</div>
+          <div class="step-desc">
+            Receive a personalized crop recommendation instantly.
+          </div>
+        </div>
+        <div class="step">
+          <i class="fas fa-chart-bar"></i>
+          <div class="step-title">4. Monitor & Improve</div>
+          <div class="step-desc">
+            Track your farm's progress and get continuous insights.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <h2>What Our Users Say</h2>
+      <div class="testimonial-cards">
+        <div class="testimonial">
+          <div class="avatar"><i class="fas fa-user"></i></div>
+          <div class="name">Ravi Kumar</div>
+          <div class="role">Farmer, Punjab</div>
+          <div class="quote">
+            "SmartCrop helped me choose the right crop for my field and
+            increased my yield by 20%!"
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="avatar"><i class="fas fa-user"></i></div>
+          <div class="name">Anjali Patel</div>
+          <div class="role">Agronomist, Gujarat</div>
+          <div class="quote">
+            "The recommendations are spot on and the interface is very easy to
+            use."
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="avatar"><i class="fas fa-user"></i></div>
+          <div class="name">Suresh Reddy</div>
+          <div class="role">Farmer, Telangana</div>
+          <div class="quote">
+            "I love the monitoring features and the support team is very
+            helpful."
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="get-started-section">
+      <h2>Ready to Grow Smarter?</h2>
+      <p>
+        Start your journey towards higher yields and sustainable farming with
+        SmartCrop.
+      </p>
+      <a href="/crop-recommendation" class="get-started-btn">Get Started Now</a>
     </section>
 
     <footer class="footer">
