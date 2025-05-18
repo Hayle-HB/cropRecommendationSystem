@@ -1,6 +1,6 @@
 Accuracy: 0.9953
 
-Classification Report: 
+Classification Report:
               precision    recall  f1-score   support
 
        apple       1.00      1.00      1.00        20
