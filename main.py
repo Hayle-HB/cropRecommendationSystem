@@ -2,6 +2,9 @@ import sys
 from pathlib import Path
 import logging
 from datetime import datetime
+import numpy as np
+import joblib
+import pandas as pd
 
 # Add subfolders to sys.path for import
 sys.path.append(str(Path(__file__).parent / 'Data Wrangling'))
@@ -36,9 +39,6 @@ def setup_logging():
 
 def print_example_predictions():
     """Print a few example predictions from the test set."""
-    import numpy as np
-    import joblib
-    import pandas as pd
     results_dir = Path("model_results")
     model = joblib.load(results_dir.parent / "ML_Model/trained_model.joblib")
     data = np.load(results_dir / "test_data.npz", allow_pickle=True)
