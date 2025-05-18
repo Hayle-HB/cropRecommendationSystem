@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farm Monitoring - SmartCrop</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Plus Jakarta Sans", "Poppins", Arial, sans-serif;
+        background: linear-gradient(120deg, #f8fafc 0%, #e8f5e9 100%);
+        display: flex;
+        flex-direction: column;
+      }
+      .coming-soon-container {
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem 1rem;
+      }
+      .coming-soon-icon {
+        font-size: 4rem;
+        color: #2d6a4f;
+        margin-bottom: 1.5rem;
+        animation: pulse 1.5s infinite alternate;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.85;
+        }
+        100% {
+          transform: scale(1.08);
+          opacity: 1;
+        }
+      }
+      .coming-soon-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2d6a4f;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+      }
+      .coming-soon-text {
+        font-size: 1.2rem;
+        color: #4a4a4a;
+        max-width: 500px;
+        margin: 0 auto 2rem auto;
+        opacity: 0.9;
+      }
+      .soon-badge {
+        display: inline-block;
+        background: #ff9e00;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.4rem 1.2rem;
+        border-radius: 999px;
+        margin-top: 1.5rem;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 8px rgba(255, 158, 0, 0.08);
+        animation: badge-pop 1.2s infinite alternate;
+      }
+      @keyframes badge-pop {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.08);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../components/NavBar') %>
+    <div class="coming-soon-container">
+      <div class="coming-soon-icon">
+        <i class="fas fa-tractor"></i>
+      </div>
+      <div class="coming-soon-title">Farm Monitoring</div>
+      <div class="coming-soon-text">
+        This feature is <strong>coming soon</strong>! <br />
+        We are working hard to bring you real-time farm monitoring, analytics,
+        and smart insights to help you manage your fields more efficiently.
+      </div>
+      <span class="soon-badge">Coming Soon</span>
+    </div>
+  </body>
+</html>

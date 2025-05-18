@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Crop Recommendation System</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #2e7d32;
+        --primary-dark: #1b5e20;
+        --secondary: #81c784;
+        --text-dark: #1a1a1a;
+        --text-light: #666666;
+        --background: #ffffff;
+        --background-alt: #f8fafc;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background: var(--background);
+      }
+
+      /* Navbar Styles */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar .brand {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .navbar .brand i {
+        font-size: 1.8rem;
+      }
+
+      .navbar nav {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .navbar nav a {
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .navbar nav a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+      }
+
+      .navbar nav a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 0 1rem;
+        margin-top: 0;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        color: white;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        border: 2px solid var(--primary);
+      }
+
+      .cta-btn:hover {
+        background: transparent;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Features Section */
+      .features {
+        padding: 5rem 5%;
+        background: var(--background-alt);
+      }
+
+      .features h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 3rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        text-align: center;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .feature-card i {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+      }
+
+      .feature-card p {
+        color: var(--text-light);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 1rem;
+        }
+
+        .navbar nav {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .features {
+          padding: 3rem 1rem;
+        }
+
+        .features h2 {
+          font-size: 2rem;
+        }
+      }
+
+      /* Animation Classes */
+      .fade-in {
+        animation: fadeIn 1s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Footer Styles */
+      .footer {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary) 100%
+        );
+        color: white;
+        padding: 4rem 5% 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.05;
+        z-index: 0;
+      }
+
+      .footer-content {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 3rem;
+      }
+
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .footer-brand .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+      }
+
+      .footer-brand .logo i {
+        font-size: 1.8rem;
+        color: var(--secondary);
+      }
+
+      .footer-brand p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        max-width: 300px;
+        line-height: 1.6;
+      }
+
+      .footer-links h3 {
+        color: white;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .footer-links h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 30px;
+        height: 2px;
+        background: var(--secondary);
+      }
+
+      .footer-links ul {
+        list-style: none;
+      }
+
+      .footer-links ul li {
+        margin-bottom: 0.75rem;
+      }
+
+      .footer-links ul li a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .footer-links ul li a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .footer-links ul li a i {
+        font-size: 0.8rem;
+        color: var(--secondary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .social-links a {
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: var(--secondary);
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 1024px) {
+        .footer-content {
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .footer {
+          padding: 3rem 1rem 1.5rem;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .footer-brand {
+          text-align: center;
+          align-items: center;
+        }
+
+        .footer-brand p {
+          max-width: 100%;
+        }
+
+        .footer-links {
+          text-align: center;
+        }
+
+        .footer-links h3::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .footer-links ul li a:hover {
+          transform: none;
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./components/NavBar') %>
+
+    <section class="hero">
+      <div class="hero-content fade-in">
+        <h1>Smart Agriculture for a Better Tomorrow</h1>
+        <p>
+          Leverage the power of AI and machine learning to make data-driven
+          decisions for your crops. Get personalized recommendations based on
+          soil conditions, climate data, and best agricultural practices.
+        </p>
+        <a href="/crop-recommendation" class="cta-btn"
+          >Get Started <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>Why Choose SmartCrop?</h2>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <i class="fas fa-brain"></i>
+          <h3>AI-Powered Insights</h3>
+          <p>
+            Advanced machine learning algorithms analyze your soil and climate
+            data to provide accurate crop recommendations.
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <i class="fas fa-chart-line"></i>
+          <h3>Data-Driven Decisions</h3>
+          <p>
+            Make informed decisions based on comprehensive analysis of multiple
+            environmental factors.
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <i class="fas fa-leaf"></i>
+          <h3>Sustainable Farming</h3>
+          <p>
+            Optimize your farming practices for better yield while maintaining
+            environmental sustainability.
+          </p>
+        </div>
+        <div class="feature-card fade-in">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>Easy to Use</h3>
+          <p>
+            Simple and intuitive interface that makes crop recommendation
+            accessible to everyone.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="/" class="logo">
+            <i class="fas fa-seedling"></i>
+            SmartCrop
+          </a>
+          <p>
+            Empowering farmers with AI-driven insights for sustainable and
+            efficient agriculture. Making smart farming accessible to everyone.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>
+              <a href="/"><i class="fas fa-chevron-right"></i>Home</a>
+            </li>
+            <li>
+              <a href="/crop-recommendation"
+                ><i class="fas fa-chevron-right"></i>Crop Recommendation</a
+              >
+            </li>
+            <li>
+              <a href="/farm-monitoring"
+                ><i class="fas fa-chevron-right"></i>Farm Monitoring</a
+              >
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i>About Us</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Resources</h3>
+          <ul>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i>Blog</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i>Documentation</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i>Support</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i>FAQ</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Legal</h3>
+          <ul>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i>Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fas fa-chevron-right"></i>Terms of Service</a
+              >
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i>Cookie Policy</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i>Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 SmartCrop. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Add smooth scroll behavior
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Add scroll animation for features
+      const observerOptions = {
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        observer.observe(card);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crop Recommendation - SmartCrop</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #2d6a4f;
+        --primary-light: #40916c;
+        --primary-dark: #1b4332;
+        --secondary: #ff9e00;
+        --background: #f8fafc;
+        --background-alt: #e8f5e9;
+        --text-dark: #1a1a1a;
+        --text-light: #4a4a4a;
+        --border: #e0e0e0;
+        --shadow: 0 4px 24px rgba(45, 106, 79, 0.08);
+      }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Plus Jakarta Sans", "Poppins", Arial, sans-serif;
+        background: linear-gradient(120deg, #f8fafc 0%, #e8f5e9 100%);
+        color: var(--text-dark);
+      }
+      .main-content {
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: calc(100vh - 60px);
+        padding: 2.5rem 1rem;
+      }
+      .form-container {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        max-width: 500px;
+        width: 100%;
+        padding: 2.5rem 2rem 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .form-header {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .form-header .icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+      .form-header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem 0;
+        color: var(--primary-dark);
+      }
+      .form-header p {
+        color: var(--text-light);
+        font-size: 1.05rem;
+        margin: 0;
+      }
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        position: relative;
+      }
+      .form-group label {
+        font-weight: 600;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1rem;
+      }
+      .form-group label i {
+        color: var(--secondary);
+        font-size: 1.1rem;
+      }
+      .form-group input {
+        padding: 0.7rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 1rem;
+        background: var(--background);
+        transition: border 0.2s;
+      }
+      .form-group input:focus {
+        border: 1.5px solid var(--primary);
+        outline: none;
+      }
+      .form-group .unit {
+        position: absolute;
+        right: 1rem;
+        top: 2.2rem;
+        font-size: 0.9rem;
+        color: var(--text-light);
+        background: #f3f3f3;
+        padding: 0.1rem 0.7rem;
+        border-radius: 8px;
+      }
+      .form-group .tooltip {
+        margin-left: 0.3rem;
+        color: var(--text-light);
+        cursor: pointer;
+        font-size: 1rem;
+        position: relative;
+      }
+      .form-group .tooltip:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        left: 110%;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #fff;
+        color: var(--primary-dark);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(45, 106, 79, 0.08);
+        z-index: 10;
+      }
+      .submit-section {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+      }
+      .submit-btn {
+        background: linear-gradient(
+          90deg,
+          var(--primary) 60%,
+          var(--primary-light) 100%
+        );
+        color: #fff;
+        border: none;
+        padding: 0.95rem 2.5rem;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(45, 106, 79, 0.08);
+        transition: background 0.2s, transform 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+      }
+      .submit-btn:hover {
+        background: linear-gradient(
+          90deg,
+          var(--primary-dark) 60%,
+          var(--primary) 100%
+        );
+        transform: translateY(-2px) scale(1.03);
+      }
+      @media (max-width: 600px) {
+        .main-content {
+          padding: 1rem 0.2rem;
+        }
+        .form-container {
+          padding: 1.5rem 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../components/NavBar') %>
+    <div class="main-content">
+      <div class="form-container">
+        <div class="form-header">
+          <div class="icon"><i class="fas fa-seedling"></i></div>
+          <h1>Crop Recommendation</h1>
+          <p>
+            Enter your soil and climate data to get a personalized crop
+            suggestion.
+          </p>
+        </div>
+        <form
+          action="/crop-recommendation/result"
+          method="POST"
+          autocomplete="off"
+        >
+          <div class="form-group">
+            <label for="n"
+              ><i class="fas fa-atom"></i> Nitrogen (N)
+              <span
+                class="tooltip"
+                data-tooltip="Nitrogen content in soil (0-140 mg/kg)"
+                ><i class="fas fa-info-circle"></i
+              ></span>
+            </label>
+            <input
+              type="number"
+              id="n"
+              name="n"
+              min="0"
+              max="140"
+              step="0.1"
+              placeholder="e.g. 90"
+              required
+            />
+            <span class="unit">mg/kg</span>
+          </div>
+          <div class="form-group">
+            <label for="p"
+              ><i class="fas fa-flask"></i> Phosphorus (P)
+              <span
+                class="tooltip"
+                data-tooltip="Phosphorus content in soil (0-145 mg/kg)"
+                ><i class="fas fa-info-circle"></i
+              ></span>
+            </label>
+            <input
+              type="number"
+              id="p"
+              name="p"
+              min="0"
+              max="145"
+              step="0.1"
+              placeholder="e.g. 42"
+              required
+            />
+            <span class="unit">mg/kg</span>
+          </div>
+          <div class="form-group">
+            <label for="k"
+              ><i class="fas fa-vial"></i> Potassium (K)
+              <span
+                class="tooltip"
+                data-tooltip="Potassium content in soil (0-205 mg/kg)"
+                ><i class="fas fa-info-circle"></i
+              ></span>
+            </label>
+            <input
+              type="number"
+              id="k"
+              name="k"
+              min="0"
+              max="205"
+              step="0.1"
+              placeholder="e.g. 60"
+              required
+            />
+            <span class="unit">mg/kg</span>
+          </div>
+          <div class="form-group">
+            <label for="temperature"
+              ><i class="fas fa-temperature-high"></i> Temperature
+              <span class="tooltip" data-tooltip="Average temperature (8-44°C)"
+                ><i class="fas fa-info-circle"></i
+              ></span>
+            </label>
+            <input
+              type="number"
+              id="temperature"
+              name="temperature"
+              min="8"
+              max="44"
+              step="0.1"
+              placeholder="e.g. 25"
+              required
+            />
+            <span class="unit">°C</span>
+          </div>
+          <div class="form-group">
+            <label for="humidity"
+              ><i class="fas fa-tint"></i> Humidity
+              <span class="tooltip" data-tooltip="Relative humidity (14-100%)"
+                ><i class="fas fa-info-circle"></i
+              ></span>
+            </label>
+            <input
+              type="number"
+              id="humidity"
+              name="humidity"
+              min="14"
+              max="100"
+              step="0.1"
+              placeholder="e.g. 60"
+              required
+            />
+            <span class="unit">%</span>
+          </div>
+          <div class="form-group">
+            <label for="ph"
+              ><i class="fas fa-vial"></i> pH Level
+              <span class="tooltip" data-tooltip="Soil pH level (3.5-10)"
+                ><i class="fas fa-info-circle"></i
+              ></span>
+            </label>
+            <input
+              type="number"
+              id="ph"
+              name="ph"
+              min="3.5"
+              max="10"
+              step="0.1"
+              placeholder="e.g. 6.5"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="rainfall"
+              ><i class="fas fa-cloud-rain"></i> Rainfall
+              <span class="tooltip" data-tooltip="Annual rainfall (20-300 mm)"
+                ><i class="fas fa-info-circle"></i
+              ></span>
+            </label>
+            <input
+              type="number"
+              id="rainfall"
+              name="rainfall"
+              min="20"
+              max="300"
+              step="0.1"
+              placeholder="e.g. 120"
+              required
+            />
+            <span class="unit">mm</span>
+          </div>
+          <div class="submit-section">
+            <button type="submit" class="submit-btn">
+              Get Recommendation <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

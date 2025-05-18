@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crop Recommendation Result - SmartCrop</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #2d6a4f;
+        --primary-light: #40916c;
+        --primary-dark: #1b4332;
+        --secondary: #ff9e00;
+        --accent: #ff6b6b;
+        --text-dark: #1a1a1a;
+        --text-light: #4a4a4a;
+        --background: #f8fafc;
+        --background-alt: #f1f5f9;
+        --success: #10b981;
+        --error: #ef4444;
+        --border: rgba(0, 0, 0, 0.08);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background: var(--background);
+        min-height: 100vh;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 0% 0%,
+            rgba(45, 106, 79, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 100% 100%,
+            rgba(255, 158, 0, 0.05) 0%,
+            transparent 50%
+          );
+        z-index: -1;
+      }
+
+      /* Navbar Styles */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        padding: 0.75rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+        height: 60px;
+      }
+
+      .navbar .brand {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .navbar .brand i {
+        font-size: 1.75rem;
+        color: var(--secondary);
+      }
+
+      .navbar nav {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .navbar nav a {
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .navbar nav a:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Main Content */
+      .main-content {
+        padding: 2rem;
+        margin-top: 60px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .result-container {
+        background: white;
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+        width: 100%;
+        max-width: 1200px;
+        overflow: hidden;
+      }
+
+      .result-header {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .result-header h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .result-header p {
+        font-size: 0.95rem;
+        opacity: 0.9;
+      }
+
+      .result-content {
+        padding: 2rem;
+      }
+
+      .crop-card {
+        background: var(--background-alt);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .crop-icon {
+        background: white;
+        width: 80px;
+        height: 80px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-md);
+      }
+
+      .crop-icon i {
+        font-size: 2.5rem;
+        color: var(--primary);
+      }
+
+      .crop-info h2 {
+        font-size: 1.75rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .crop-info p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      .data-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .data-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+
+      .data-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .data-card h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 0.75rem;
+      }
+
+      .data-card h3 i {
+        color: var(--primary);
+        font-size: 1.1rem;
+      }
+
+      .data-card .value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+
+      .data-card .unit {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-left: 0.25rem;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        padding: 1.5rem 2rem;
+        background: var(--background-alt);
+        border-top: 1px solid var(--border);
+      }
+
+      .btn {
+        padding: 0.875rem 1.75rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--text-dark);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--background-alt);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      @media (max-width: 1024px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        .data-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 0.5rem 1rem;
+        }
+
+        .navbar nav {
+          display: none;
+        }
+
+        .main-content {
+          padding: 0.5rem;
+        }
+
+        .result-header {
+          padding: 1.5rem;
+        }
+
+        .result-content {
+          padding: 1rem;
+        }
+
+        .crop-card {
+          flex-direction: column;
+          text-align: center;
+          padding: 1.5rem;
+        }
+
+        .data-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+          padding: 1rem;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../components/NavBar.ejs') %>
+
+    <div class="main-content">
+      <div class="result-container">
+        <div class="result-header">
+          <h1>Recommended Crop</h1>
+          <p>Based on your soil and climate data analysis</p>
+        </div>
+
+        <div class="result-content">
+          <div class="crop-card">
+            <div class="crop-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <div class="crop-info">
+              <h2><%= recommendedCrop %></h2>
+              <p>
+                This crop is optimally suited for your soil conditions and
+                climate. The recommendation is based on comprehensive analysis
+                of your input parameters to ensure maximum yield potential.
+              </p>
+            </div>
+          </div>
+
+          <div class="data-grid">
+            <div class="data-card">
+              <h3><i class="fas fa-flask"></i> Nitrogen (N)</h3>
+              <div class="value"><%= n %><span class="unit">mg/kg</span></div>
+            </div>
+            <div class="data-card">
+              <h3><i class="fas fa-flask"></i> Phosphorus (P)</h3>
+              <div class="value"><%= p %><span class="unit">mg/kg</span></div>
+            </div>
+            <div class="data-card">
+              <h3><i class="fas fa-flask"></i> Potassium (K)</h3>
+              <div class="value"><%= k %><span class="unit">mg/kg</span></div>
+            </div>
+            <div class="data-card">
+              <h3><i class="fas fa-temperature-high"></i> Temperature</h3>
+              <div class="value">
+                <%= temperature %><span class="unit">°C</span>
+              </div>
+            </div>
+            <div class="data-card">
+              <h3><i class="fas fa-tint"></i> Humidity</h3>
+              <div class="value">
+                <%= humidity %><span class="unit">%</span>
+              </div>
+            </div>
+            <div class="data-card">
+              <h3><i class="fas fa-vial"></i> pH Level</h3>
+              <div class="value"><%= ph %></div>
+            </div>
+            <div class="data-card">
+              <h3><i class="fas fa-cloud-rain"></i> Rainfall</h3>
+              <div class="value">
+                <%= rainfall %><span class="unit">mm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <a href="/crop-recommendation" class="btn btn-secondary">
+            <i class="fas fa-redo"></i>
+            New Recommendation
+          </a>
+          <a href="/" class="btn btn-primary">
+            <i class="fas fa-home"></i>
+            Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
